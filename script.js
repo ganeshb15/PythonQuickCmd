@@ -17,6 +17,7 @@ $(function(){
     var $3=$("#3"); 
     var $4=$("#4"); 	
     var $5=$("#5");	
+    var $6=$("#6");	
     var $0r=$("#0r");
 
 
@@ -28,6 +29,7 @@ $(function(){
     connectors.push({from:$1,to:$3});	
     connectors.push({from:$4,to:$0r});	
    connectors.push({from:$5,to:$0r});
+  connectors.push({from:$6,to:$0r});
 
     connect();
     $(".draggable").draggable({
