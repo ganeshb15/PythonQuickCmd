@@ -28,7 +28,12 @@ var $4=$("#4");
 connectors.push({from:$4,to:$0r});	
 
     connect();
-
+    $(".draggable").draggable({
+        // event handlers
+        start: noop,
+        drag:  connect,
+        stop:  noop
+    });
 
     function noop(){}
 
