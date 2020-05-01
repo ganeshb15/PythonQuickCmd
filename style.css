@@ -42,5 +42,9 @@ background:skyblue;
   left: 80%;}
 
    #position5{  position: fixed; /* or absolute */
-  top: 30%;
+  top: 20%;
   left: 40%;}
+
+  #position6{  position: fixed; /* or absolute */
+  top: 40%;
+  left: 10%;}
