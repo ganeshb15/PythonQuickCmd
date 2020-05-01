@@ -1,25 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" /> <!-- reset css -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+
 <style>
+
 body {
-  background-image: url("bg.jpg");
+background-image: url("bg.jpg");
   background-repeat: repeat-n;
+margin: 0; height: 100%; overflow: hidden}
+    #canvas{
+        position:absolute;
+
+        width:100%;height:100%;
+    }
+    .draggable{
+        width:50px;
+        height:30px;
+        
+    }
+.textwrite{
+background:skyblue;
+        border:1px solid green;
 }
-.centered {
-  position: fixed; /* or absolute */
+    .right{
+        margin-left:100px; 
+        background:salmon;
+    }
+    #wrap2{  position: fixed; /* or absolute */
   top: 50%;
-  left: 50%;
-}
+  left: 50%;}
+
+    #position1{  position: fixed; /* or absolute */
+  top: 30%;
+  left: 70%;}
+
+    #position2{  position: fixed; /* or absolute */
+  top: 70%;
+  left: 70%;}
+
+   #position3{  position: fixed; /* or absolute */
+  top: 60%;
+  left: 80%;}
+
+   #position4{  position: fixed; /* or absolute */
+  top: 70%;
+  left: 80%;}
+
+   #position5{  position: fixed; /* or absolute */
+  top: 30%;
+  left: 40%;}
 </style>
-<body >
+<script>
+$(function(){
 
- <img class="centered" src="python.png" alt="Italian Trulli">
+    var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext("2d");
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    ctx.lineWidth=3;
+
+    var $canvas=$("#canvas");
+    var canvasOffset=$canvas.offset();
+    var offsetX=canvasOffset.left;
+    var offsetY=canvasOffset.top;
+
+    var $0=$("#0");
+    var $1=$("#1");
+    var $2=$("#2");
+    var $3=$("#3"); 
+var $4=$("#4"); 		
+    var $0r=$("#0r");
 
 
+    var connectors=[];
+    connectors.push({from:$0,to:$0r});
+    connectors.push({from:$1,to:$0r});
+    //connectors.push({from:$2,to:$0r});
+    connectors.push({from:$1,to:$2});	
+    connectors.push({from:$1,to:$3});	
+connectors.push({from:$4,to:$0r});	
+
+    connect();
+
+    $(".draggable").draggable({
+        // event handlers
+        start: noop,
+        drag:  connect,
+        stop:  noop
+    });
+
+    function noop(){}
+
+    function connect(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(var i=0;i<connectors.length;i++){
+            var c=connectors[i];
+            var eFrom=c.from;
+            var eTo=c.to;
+            var pos1=eFrom.offset();
+            var pos2=eTo.offset();
+            var size1=eFrom.size();
+            var size2=eTo.size();
+            ctx.beginPath();
+            ctx.moveTo(pos1.left+eFrom.width()+3,pos1.top+eFrom.height());
+            ctx.lineTo(pos2.left+3,pos2.top+eTo.height());
+            ctx.stroke();
+
+        }
+    }
+
+}); // end $(function(){});
+</script>
+</head>
+<body>
+    <canvas id="canvas" width=300 height=300></canvas>
+    <div>
+     <div id="position1"> <a href="Pandas/index.html">  <div id="0" class="draggable"> <img src="pandas.jpeg" width="100"></div></a></div>
+       <div id="position2"> <div id="1" class="draggable"> <img src="Tk.png" width="100"></div></div>
+        <div id="position3"><a href="Tkinter/index.html"> <div id="2" class="draggable textwrite">Type1</div></a></div>
+        <div id="position4"> <div id="3" class="draggable textwrite">Type2</div> </div>
+	<div id="position5"> <div id="4" class="draggable"><img src="matplotlib.png" width="100"></div> </div
+    </div>
+    <div id="wrap2">
+        <div id="0r" class="draggable"><img src="python.png" width="100"></div>
 
 
-
-
+    </div>
 </body>
 </html>
-
